@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="student" class="org.lanqiao.entity.Student">
+        <property name="stuAge" value="13"></property>
+        <property name="stuName" value="hhxx"></property>
+        <property name="stuNum" value="12"></property>
+    </bean>
+    <bean id="javaCourse" class="org.lanqiao.factory.JavaCourse"></bean>
+    <bean id="htmlCourse" class="org.lanqiao.factory.HtmlCourse"></bean>
+    <bean id="Teacher" class="org.lanqiao.entity.Teacher">
+        <property name="age" value="19"></property>
+        <property name="teacherName" value="zs"></property>
+    </bean>
+    <bean id="Course" class="org.lanqiao.entity.Course">
+        <property name="cname" value="java"></property>
+        <property name="teacher" ref="Teacher"></property>
+    </bean>
+    <bean id="AllConnectionType" class="org.lanqiao.entity.AllConnectionType">
+        <property name="list">
+            <list>
+                <value>足球</value>
+                <value>篮球</value>
+                <value>乒乓球</value>
+            </list>
+        </property>
+        <property name="array">
+            <array>
+                <value>足球1</value>
+                <value>篮球1</value>
+                <value>乒乓球1</value>
+            </array>
+        </property>
+        <property name="map">
+            <map>
+                <entry>
+                    <key>
+                        <value>foot2</value>
+                    </key>
+                    <value>足球2</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>basket2</value>
+                    </key>
+                    <value>篮球2</value>
+                </entry>
+                <entry>
+                    <key>
+                        <value>pp2</value>
+                    </key>
+                    <value>乒乓球2</value>
+                </entry>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="foot3">足球3</prop>
+                <prop key="basket3">篮球3</prop>
+                <prop key="pp3">乒乓球3</prop>
+            </props>
+        </property>
+        <property name="set">
+            <set>
+                <value>足球4</value>
+                <value>篮球4</value>
+                <value>乒乓球4</value>
+            </set>
+        </property>
+    </bean>
+    <!-- 前置通知类 -->
+    <bean id="LogBefor" class="org.lanqiao.AOP.Logbefore"></bean>
+    <!-- 后置通知-->
+    <bean id="LogAfter" class="org.lanqiao.AOP.LogAfter"></bean>
+    <!--关联 -->
+    <aop:config>
+        <aop:pointcut id="point1" expression="execution(public void org.lanqiao.entity.Student.learn(String))"/>
+        <aop:advisor advice-ref="LogBefor" pointcut-ref="point1"/>
+    </aop:config>
+    <aop:config>
+        <aop:pointcut id="point2" expression="execution(public void org.lanqiao.entity.Student.learn(String))"/>
+        <aop:advisor advice-ref="LogAfter" pointcut-ref="point2"/>
+    </aop:config>
+</beans>
