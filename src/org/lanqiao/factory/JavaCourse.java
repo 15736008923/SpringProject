@@ -6,5 +6,6 @@ public class JavaCourse implements ICourse {
         System.out.print("学习Java");
         System.out.print("学习Java?");
         System.out.print("学习Java??");
+        System.out.print("学习Java??");
     }
 }
